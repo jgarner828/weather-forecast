@@ -11,17 +11,18 @@
 </head>
 <body>
     
-<header >
-    <h1 class='headerEL'>Weather Dashboard</h1>
+<header class='headerEL text-center p-2 text-white'>
+    <h1 >Weather Dashboard</h1>
 </header>
 
 <container class='mainEl d-flex flex-row'>
+
     <!-- This is the left main area with the search box -->
-    <div class='searchContainer d-flex flex-column w-25 m-3'>
+    <div class='searchContainer d-flex flex-column w-25 h-auto m-3 p-1 border border-dark text-center'>
         <div class='searchEl d-flex flex-column'>
             <h2>Search for a City:</h2>
             <textarea id ='city' placeholder='Atlanta'></textarea>
-            <button class='btn'>Search</button>
+            <button class='btn btn-primary'>Search</button>
             <div class='prevSearchEl'></div>
         </div>
 
@@ -29,15 +30,15 @@
     </div>
 
     <!-- this is the right container with the top and bottom  -->
-    <div class='resultsContainer w-75'>
-        <div class='dailyResultsEL'>
+    <div class='resultsContainer w-75 m-3'>
+        <div class='dailyResultsEL border border-dark p-2'>
             <h2 class='resultNameEL'></h2>
             <p class='tempEL'></p>
             <p class='windEl'></p>
             <p class='humidityEL'></p>
             <p class='uvIndex'></p>
         </div>
-        <div class='fiveDayResultsEl'></div>
+        <div class='fiveDayResultsEl border border-dark'></div>
     </div>
 </container>
 
