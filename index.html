@@ -30,7 +30,7 @@
     </div>
 
     <!-- this is the right container with the top and bottom  -->
-    <div class='resultsContainer w-75 m-3'>
+    <div class='resultsContainer w-75 m-3 d-flex flex-column'>
         <div class='dailyResultsEL border border-dark p-2'>
             <h2 class='resultNameEL'></h2>
             <p class='tempEL'></p>
@@ -38,10 +38,11 @@
             <p class='humidityEL'></p>
             <p class='uvIndex'></p>
         </div>
-        <div class='fiveDayResultsEl border border-dark'></div>
+        <div class='fiveDayResultsEl border border-dark d-flex flex-row p-1'></div>
     </div>
 </container>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src='script.js'></script>
 </body>
