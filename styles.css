@@ -12,3 +12,7 @@
 .headerEL {
     background-color: blue;
 }
+
+#city {
+    resize: none;
+}
