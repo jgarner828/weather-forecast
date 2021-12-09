@@ -9,17 +9,27 @@ function getWeather(cityName) {
             return response.json();
         })
         .then(data => {
-            console.log('this is the daily weather data');
-            console.log(data);
+            // console.log('this is the daily weather data');
+            // console.log(data);
             displayWeather(data);
             getFiveDayWeather(data);
+        })
+        .catch(error => {
+            alert ('City not found!');
+            return;
         })
 }
 
 
 // this function receives data and sends it to the correct elements.
 function displayWeather(data) {
+
+let weatherIcon = data.weather[0].icon;    
+let iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+
+
 $('.resultNameEL').text(data.name);
+$(".dailyIMG").attr("src", iconURL);
 let temp = Math.trunc(((data.main.temp-273.15)*1.8)+32);
 $('.tempEL').text("Temp: " + temp + ' deg F');
 $('.windEl').text("Wind Speed: " + data.wind.speed + ' mph');
@@ -68,17 +78,59 @@ function displayFiveDayWeather(data) {
 }
 
 
-function prevSearch(input) {
-    $('.searchContainer').append('<button>' + input + '</button>');
+function prevSearch(inputCity) {
+    let prevSearch = localStorage.getItem('prevCity');
+    console.log(prevSearch);
+    
+    let cityArray = [];
+
+
+    //if there is no value in localstorage for prevSearch.... add in the input as the first value.
+    if(prevSearch === null) {
+        // console.log("prevCity value is null");
+        cityArray[0] = inputCity;
+        let cityLocal = JSON.stringify(cityArray);
+        localStorage.setItem('prevCity', cityLocal);
+        return;
+    } else {        // if there is a list of cities.... turn value back into an array... check array to add inputCity and save new array
+        // console.log("the value of prevCity is " + prevSearch);
+        cityArray = JSON.parse(prevSearch);
+        // console.log(typeof prevSearch);
+            if (cityArray.includes(inputCity)) {
+                prevCitybtns(cityArray);
+                return;
+            }
+        cityArray.push(inputCity);
+        let cityLocal = JSON.stringify(cityArray);
+        localStorage.setItem('prevCity', cityLocal);
+        prevCitybtns(cityArray);
+        return;
+    }
+         
+
 }
 
+//takes the value from local storage of previous cities and creates a button for each one that fetches data.
+function prevCitybtns(cityArray) {
+
+
+}
 
 // This is where all the script starts....
 
 $('.btn').click(function() {
     var input = $(this).siblings('textarea').val();
+
+    if(!input) {
+        alert('Please enter a city!');
+        return;
+
+    }
+
     $('.fiveDayResultsEl').empty();
     getWeather(input);
+    prevSearch(input);
 
 });
+
 
