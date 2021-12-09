@@ -69,9 +69,9 @@ function displayFiveDayWeather(data) {
   
 
         //this appends the generated data onto the dashboard's element
+        $('.fiveDayResultsEl').addClass('border border-dark d-flex flex-row');
         let newDayEl = $('.fiveDayResultsEl').append('<div>' + '<h3>' + date + '</h3>' + '<img src=\"' + iconURL +'\"></img> <div> Temp: ' + temp + ' deg F</div> <div> Wind: ' + wind + ' mph</div><div> Humidity: ' + humidity + '</div>');
         
-        newDayEl.addClass('d-flex w-20 border border-dark p-4');
 
     }
 
@@ -115,15 +115,15 @@ function prevCitybtns(cityArray) {
 
     // console.log(cityArray.length);
     for (let i = 0; i < cityArray.length; i++) {
-        console.log(cityArray[i]);
-        $('.list-group').append('<li id="' + cityArray[i] + ' ">' + cityArray[i] + '</li>')
+        // console.log(cityArray[i]);
+        $('.list-group').append('<li id = \"' + cityArray[i] + '\">' + cityArray[i] + '</li>')
     }
     return;
 }
 
 // This is where all the script starts....
 
-$('.btn').click(function() {
+$('.searchBtn').click(function() {
     var input = $(this).siblings('textarea').val();
 
     if(!input) {
@@ -139,8 +139,3 @@ $('.btn').click(function() {
 });
 
 
-// if they click on the city in the previouscity list item.....
-$('li').click(function() {
-    var input = $(this).attr('id');
-    getWeather(input);
-})
