@@ -19,3 +19,7 @@
 #city {
     resize: none;
 }
+
+li:hover {
+    cursor:pointer;
+}

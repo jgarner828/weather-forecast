@@ -48,8 +48,8 @@ function getFiveDayWeather(data) {
             return response.json();
         })
         .then(data => {
-            console.log('this is the 5 day weather data');
-            console.log(data);
+            // console.log('this is the 5 day weather data');
+            // console.log(data);
             displayFiveDayWeather(data);
         })
 
@@ -80,7 +80,7 @@ function displayFiveDayWeather(data) {
 
 function prevSearch(inputCity) {
     let prevSearch = localStorage.getItem('prevCity');
-    console.log(prevSearch);
+    // console.log(prevSearch);
     
     let cityArray = [];
 
@@ -113,7 +113,12 @@ function prevSearch(inputCity) {
 //takes the value from local storage of previous cities and creates a button for each one that fetches data.
 function prevCitybtns(cityArray) {
 
-
+    // console.log(cityArray.length);
+    for (let i = 0; i < cityArray.length; i++) {
+        console.log(cityArray[i]);
+        $('.list-group').append('<li id="' + cityArray[i] + ' ">' + cityArray[i] + '</li>')
+    }
+    return;
 }
 
 // This is where all the script starts....
@@ -134,3 +139,8 @@ $('.btn').click(function() {
 });
 
 
+// if they click on the city in the previouscity list item.....
+$('li').click(function() {
+    var input = $(this).attr('id');
+    getWeather(input);
+})
