@@ -54,11 +54,14 @@ function displayFiveDayWeather(data) {
         let temp = Math.trunc(((data.daily[i].temp.day -273.15)*1.8)+32);
         let wind = data.daily[i].wind_speed;
         let humidity = data.daily[i].humidity;
+        let weatherIcon = data.daily[i].weather[0].icon;    
+        let iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+  
 
         //this appends the generated data onto the dashboard's element
-        let newDayEl = $('.fiveDayResultsEl').append('<div>' + '<h3>' + date + '</h3>' + '<div> Temp: ' + temp + ' deg F</div>' + '<div> Wind: ' + wind + ' mph</div>' + '<div> Humidity: ' + humidity + '</div>');
+        let newDayEl = $('.fiveDayResultsEl').append('<div>' + '<h3>' + date + '</h3>' + '<img src=\"' + iconURL +'\"></img> <div> Temp: ' + temp + ' deg F</div> <div> Wind: ' + wind + ' mph</div><div> Humidity: ' + humidity + '</div>');
         
-        newDayEl.addClass('d-flex w-20 border border-dark p-4')
+        newDayEl.addClass('d-flex w-20 border border-dark p-4');
 
     }
 
