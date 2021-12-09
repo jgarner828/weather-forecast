@@ -21,8 +21,8 @@ function getWeather(cityName) {
 function displayWeather(data) {
 $('.resultNameEL').text(data.name);
 let temp = Math.trunc(((data.main.temp-273.15)*1.8)+32);
-$('.tempEL').text("Temp: " + temp);
-$('.windEl').text("Wind Speed: " + data.wind.speed);
+$('.tempEL').text("Temp: " + temp + ' deg F');
+$('.windEl').text("Wind Speed: " + data.wind.speed + ' mph');
 $('.humidityEl').text("Humidity: " + data.main.humidity);
 $('.uvIndex').text("UV Index: " + data.clouds.all);
 }
@@ -56,17 +56,17 @@ function displayFiveDayWeather(data) {
         let humidity = data.daily[i].humidity;
 
         //this appends the generated data onto the dashboard's element
-        let newDayEl = $('.fiveDayResultsEl').append('<div> </div>');
-
-        newDayEl.append('<p>Date: ' + date + '</p>');
-        newDayEl.append('<p> Temp: ' + temp + '</p>');
-        newDayEl.append('<p> Wind: ' + wind + '</p>');
-        newDayEl.append('<p> Humidity: ' + humidity + '</p>');
-
-
+        let newDayEl = $('.fiveDayResultsEl').append('<div>' + '<h3>' + date + '</h3>' + '<div> Temp: ' + temp + ' deg F</div>' + '<div> Wind: ' + wind + ' mph</div>' + '<div> Humidity: ' + humidity + '</div>');
+        
+        newDayEl.addClass('d-flex w-20 border border-dark p-4')
 
     }
 
+}
+
+
+function prevSearch(input) {
+    $('.searchContainer').append('<button>' + input + '</button>');
 }
 
 
@@ -76,7 +76,6 @@ $('.btn').click(function() {
     var input = $(this).siblings('textarea').val();
     $('.fiveDayResultsEl').empty();
     getWeather(input);
-}
 
-)
+});
 
