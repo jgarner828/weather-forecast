@@ -1,5 +1,7 @@
 
-
+//
+//
+//
 // this function calls the API to retrieve data and send it to the displayWeather function
 function getWeather(cityName) {
     let URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=af25342231667911f3ebe786f4537f3d";
@@ -21,6 +23,10 @@ function getWeather(cityName) {
 }
 
 
+
+//
+//
+//
 // this function receives data and sends it to the correct elements.
 function displayWeather(data) {
 
@@ -37,7 +43,11 @@ $('.humidityEl').text("Humidity: " + data.main.humidity);
 $('.uvIndex').text("UV Index: " + data.clouds.all);
 }
 
-
+//
+//
+//
+//
+// this function gets the five day weather data from the API and sends it to displayFiveDayWeather function
 function getFiveDayWeather(data) {
     let lat = data.coord.lat;
     let lon = data.coord.lon;
@@ -55,7 +65,17 @@ function getFiveDayWeather(data) {
 
 }
 
+
+//
+//
+//
+//
+//
+// This function displays the 5 day weather data that was sent from the API
 function displayFiveDayWeather(data) {
+
+    $('.fiveDayResultsEl').empty();
+    
 
     // this loops through each day generating the data...
     for(let i = 1; i <= 5; i++) {
@@ -78,13 +98,17 @@ function displayFiveDayWeather(data) {
 }
 
 
+
+//
+//
+// this creates the previous search array and sends it to prevCitybtns function
 function prevSearch(inputCity) {
+    
+
     let prevSearch = localStorage.getItem('prevCity');
     // console.log(prevSearch);
     
     let cityArray = [];
-
-
     //if there is no value in localstorage for prevSearch.... add in the input as the first value.
     if(prevSearch === null) {
         // console.log("prevCity value is null");
@@ -103,26 +127,51 @@ function prevSearch(inputCity) {
         cityArray.push(inputCity);
         let cityLocal = JSON.stringify(cityArray);
         localStorage.setItem('prevCity', cityLocal);
-        prevCitybtns(cityArray);
         return;
     }
          
 
 }
 
+//
+//
+//
 //takes the value from local storage of previous cities and creates a button for each one that fetches data.
-function prevCitybtns(cityArray) {
+function prevCitybtns() {
+    
+    let prevSearch = localStorage.getItem('prevCity');
+
+    if( prevSearch == null){
+        return;
+    }
+    let cityArray = [];
+    cityArray = JSON.parse(prevSearch);
+
+ 
 
     // console.log(cityArray.length);
     for (let i = 0; i < cityArray.length; i++) {
         // console.log(cityArray[i]);
-        $('.list-group').append('<li id = \"' + cityArray[i] + '\">' + cityArray[i] + '</li>')
+        $('.list-group').append('<li id = \"' + cityArray[i] + '\">' + cityArray[i] + '</li>');
     }
     return;
 }
 
-// This is where all the script starts....
 
+//
+//
+//
+//  This is where all the script starts....
+//
+//
+//
+// 
+
+
+prevCitybtns();
+
+//
+// Search button click function
 $('.searchBtn').click(function() {
     var input = $(this).siblings('textarea').val();
 
@@ -138,4 +187,10 @@ $('.searchBtn').click(function() {
 
 });
 
+//
+// dynamically generated list item click function....
+$("li").on("click", function (event) {
+   var cityID = this.id;
+   getWeather(cityID);
 
+})
