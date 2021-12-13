@@ -1,4 +1,3 @@
-
 //
 //
 //
@@ -6,20 +5,19 @@
 function getWeather(cityName) {
     let URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=af25342231667911f3ebe786f4537f3d";
 
+
     fetch(URL)
         .then(response => {
             return response.json();
         })
         .then(data => {
-            // console.log('this is the daily weather data');
-            // console.log(data);
             displayWeather(data);
             getFiveDayWeather(data);
         })
         .catch(error => {
             alert ('City not found!');
-            return;
         })
+        
 }
 
 
@@ -175,13 +173,12 @@ prevCitybtns();
 $('.searchBtn').click(function() {
     var input = $(this).siblings('textarea').val();
 
-    if(!input) {
-        alert('Please enter a city!');
-        return;
-
+    if(!input) {   
+        return alert('Please enter a city!');
     }
 
     $('.fiveDayResultsEl').empty();
+
     getWeather(input);
     prevSearch(input);
 
