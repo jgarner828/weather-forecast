@@ -121,7 +121,6 @@ function prevSearch(inputCity) {
         cityArray = JSON.parse(prevSearch);
         // console.log(typeof prevSearch);
             if (cityArray.includes(inputCity)) {
-                prevCitybtns(cityArray);
                 return;
             }
         cityArray.push(inputCity);
@@ -148,6 +147,7 @@ function prevCitybtns() {
     cityArray = JSON.parse(prevSearch);
 
  
+
 
     // console.log(cityArray.length);
     for (let i = 0; i < cityArray.length; i++) {
@@ -194,3 +194,9 @@ $("li").on("click", function (event) {
    getWeather(cityID);
 
 })
+
+// this button click clears out the previous search history
+$('.clearBtn').click(function() {
+    localStorage.removeItem('prevCity');
+    location.reload();
+});
